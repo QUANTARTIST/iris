@@ -1,20 +1,198 @@
+> #  look at the 'iris' dataset that comes with R.
+> library(datasets)
+> data(iris)
+> # A description of the dataset can be found by running
+> ?iris
+> str(iris)
+'data.frame':   150 obs. of  5 variables:
+ $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+> head(iris)
+  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa
+> virginica<-subset(iris,Species == 'virginica')
+> virginica<-subset(iris,Species == 'virginica')
+> 
+> sl<-data.frame(virginica$Sepal.Length)
+> 
+> sl<-data.frame(iris$Sepal.Length[iris$Species=="virginica"])
+> sl
+   iris.Sepal.Length.iris.Species.....virginica..
+1                                             6.3
+2                                             5.8
+3                                             7.1
+4                                             6.3
+5                                             6.5
+6                                             7.6
+7                                             4.9
+8                                             7.3
+9                                             6.7
+10                                            7.2
+11                                            6.5
+12                                            6.4
+13                                            6.8
+14                                            5.7
+15                                            5.8
+16                                            6.4
+17                                            6.5
+18                                            7.7
+19                                            7.7
+20                                            6.0
+21                                            6.9
+22                                            5.6
+23                                            7.7
+24                                            6.3
+25                                            6.7
+26                                            7.2
+27                                            6.2
+28                                            6.1
+29                                            6.4
+30                                            7.2
+31                                            7.4
+32                                            7.9
+33                                            6.4
+34                                            6.3
+35                                            6.1
+36                                            7.7
+37                                            6.3
+38                                            6.4
+39                                            6.0
+40                                            6.9
+41                                            6.7
+42                                            6.9
+43                                            5.8
+44                                            6.8
+45                                            6.7
+46                                            6.7
+47                                            6.3
+48                                            6.5
+49                                            6.2
+50                                            5.9
+> summary(sl)
+ iris.Sepal.Length.iris.Species.....virginica..
+ Min.   :4.900                                 
+ 1st Qu.:6.225                                 
+ Median :6.500                                 
+ Mean   :6.588                                 
+ 3rd Qu.:6.900                                 
+ Max.   :7.900                                 
+> #  Mean   :6.588 
+> # Q2
+> # Continuing with the 'iris' dataset from the previous Question, what R code returns a vector of the means of the variables 'Sepal.Length', 'Sepal.Width', 'Petal.Length', and 'Petal.Width'?
+> apply(iris[, 1:4])
+Error in match.fun(FUN) : argument "FUN" is missing, with no default
+> apply(iris[, 1:4], 2, mean)
+Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+    5.843333     3.057333     3.758000     1.199333 
+> # Q3
+> Load the 'mtcars' dataset in R with the following code
+Error: unexpected symbol in "Load the"
+> library(datasets)
+> data(mtcars)
+> #There will be an object names 'mtcars' in your workspace. You can find some information about the dataset by running
+> #How can one calculate the average miles per gallon (mpg) by number of cylinders in the car (cyl)? Select all that apply.
+> lapply(mtcars, mean)
+$mpg
+[1] 20.09062
 
-R version 3.3.0 (2016-05-03) -- "Supposedly Educational"
-Copyright (C) 2016 The R Foundation for Statistical Computing
-Platform: i386-w64-mingw32/i386 (32-bit)
+$cyl
+[1] 6.1875
 
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
+$disp
+[1] 230.7219
 
-  Natural language support but running in an English locale
+$hp
+[1] 146.6875
 
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
+$drat
+[1] 3.596563
 
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
+$wt
+[1] 3.21725
 
+$qsec
+[1] 17.84875
+
+$vs
+[1] 0.4375
+
+$am
+[1] 0.40625
+
+$gear
+[1] 3.6875
+
+$carb
+[1] 2.8125
+
+> sapply(mtcars, cyl, mean)
+Error in match.fun(FUN) : object 'cyl' not found
+> sapply(split(mtcars$mpg,mtcars$cyl),mean)
+       4        6        8 
+26.66364 19.74286 15.10000 
+> mean(mtcars$mpg,mtcars$cyl)
+Error in mean.default(mtcars$mpg, mtcars$cyl) : 
+  'trim' must be numeric of length one
+> split(mtcars,mtcars$cyl)
+$`4`
+                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+
+$`6`
+                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Valiant        18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Merc 280       19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C      17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+
+$`8`
+                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+
+> #4
+> x <- with(mtcars, tapply(hp, cyl, mean))
+> x
+        4         6         8 
+ 82.63636 122.28571 209.21429 
+> x[3] - x[1]
+       8 
+126.5779 
+> 
+> #5
+> # If you run debug(ls)what happens when you next call the 'ls' function?
+> #Execution of 'ls' will suspend at the beginning of the function and you will be in the browser. 
 > 
